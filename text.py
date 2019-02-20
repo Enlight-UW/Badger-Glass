@@ -9,8 +9,6 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 
-#TODO : MAKE A BLACK AND WHITE COLOR SWITCH
-
 # Raspberry Pi pin configuration:
 RST = 24
 # Note the following are only used with SPI:
