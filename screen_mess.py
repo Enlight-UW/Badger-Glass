@@ -48,14 +48,24 @@ else:
     bgColor = colorWhite
     fntColor = colorBlack
     
-
+#set text to be written to screen
 def writeToScreen(msg, x, y, draw, fnt ):
 
     draw.text((3+x, 13+y), msg, font=fnt, fill=fntColor)
 
     return
 
+#Setup screen with ui
+def initScreen():
+  clearScreen(draw)
+  draw.line((0,top,0,hP), fill=fntColor)
+  draw.line((width-1,top,width-1,hP), fill=fntColor)
+  draw.line((0,top,width,top), fill=fntColor)
+  draw.line((0,10,width,hP), fill=fntColor)
+  draw.line((width-25,top,width-25,hP), fill=fntColor)
 
+
+#update screen with new text
 def updateScreen(disp, image):
     disp.image(image)
     disp.display()
@@ -124,11 +134,4 @@ else:
 
 hP = 10
 
-def initScreen():
-  clearScreen(draw)
-  draw.line((0,top,0,hP), fill=fntColor)
-  draw.line((width-1,top,width-1,hP), fill=fntColor)
-  draw.line((0,top,width,top), fill=fntColor)
-  draw.line((0,10,width,hP), fill=fntColor)
-  draw.line((width-25,top,width-25,hP), fill=fntColor)
 
