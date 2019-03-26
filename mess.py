@@ -10,6 +10,9 @@ if(len(sys.argv) >= 3):
 
     if not client.isLoggedIn():
         print "Login Failed!"
+    else:
+        print('My ID: ' + client.uid)
+        
 
 else:
     print "Invalid Username or Passowrd!"
