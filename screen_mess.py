@@ -1,6 +1,8 @@
 # Enlight UW Badger Glass
 import time
 
+import os
+
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
 
@@ -19,7 +21,7 @@ class MessageListener(Client):
       cleanMessage = message_object.text.strip()
       cleanMessage = cleanMessage.encode('ascii', 'ignore')
         
-      print(cleanMessage)
+      print(author_id + " " + cleanMessage)
       clearScreen(draw)
       writeToScreen(cleanMessage, 0,0, draw, font)
       updateScreen(disp, image)
@@ -74,24 +76,25 @@ def writeToScreen(msg, x, y, draw, fnt ):
                 tmpString = tmpString + splitString[i] + " "
             else:
                 #if the next word wont fit on this line, print the string as is
-                draw.text((3+x, 13+y+(lines*10)), tmpString, font=fnt, fill=fntColor)
+                draw.text((3+x, 3+y+(lines*10)), tmpString, font=fnt, fill=fntColor)
                 tmpString = splitString[i] + " "
                 lines+=1
     
     if(len(tmpString) != 0):
-        draw.text((3+x, 13+y+(lines*10)), tmpString, font=fnt, fill=fntColor)
+        draw.text((3+x, 3+y+(lines*10)), tmpString, font=fnt, fill=fntColor)
 
     return
 
 #Setup screen with ui
 def initScreen():
   clearScreen(draw)
+  '''
   draw.line((0,top,0,hP), fill=fntColor)
   draw.line((width-1,top,width-1,hP), fill=fntColor)
   draw.line((0,top,width,top), fill=fntColor)
   draw.line((0,10,width,hP), fill=fntColor)
   draw.line((width-25,top,width-25,hP), fill=fntColor)
-
+    '''
 
 #update screen with new text
 def updateScreen(disp, image):
@@ -101,7 +104,7 @@ def updateScreen(disp, image):
 
 
 def clearScreen(draw):
-    draw.rectangle((0,11,width,height), outline=bgColor, fill=bgColor)
+    draw.rectangle((0,0,width,height), outline=bgColor, fill=bgColor)
     return
 
 # Initialize library.
@@ -137,8 +140,10 @@ font = ImageFont.load_default()
 #THE ACTUAL PROGRAM BEGINS HERE!!!!
 ##
 ###
+
 hP = 10
 if(len(sys.argv) >= 3):
+    os.system('clear')
     uname = sys.argv[1]
     pword = sys.argv[2]
     #client = Client(uname, pword)
@@ -159,7 +164,7 @@ if(len(sys.argv) >= 3):
         
 
 else:
-    print "Invalid Username or Passowrd!"
+    print "python <progname> <messenger username> <messenger password>"
 #####
 
 hP = 10
